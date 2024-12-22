@@ -35,17 +35,20 @@ def fixed_point(arr: list[int]) -> int:
         int: The smallest index i that satisfies arr[i] == i. If there is no such index, return -1.
     """
     left, right = 0, len(arr) - 1
+    result = -1  # Initialize result to -1 to indicate no fixed point found
     while left <= right:
         mid = left + (right - left) // 2
-        if arr[mid] < mid:
+        if arr[mid] == mid:
+            result = mid  # Update the result to the current fixed point
+            right = mid - 1  # Continue searching in the left half for a smaller index
+        elif arr[mid] < mid:
             left = mid + 1
-        elif arr[mid] > mid:
-            right = mid - 1
         else:
-            return mid
-    return -1
+            right = mid - 1
+    return result
 
 
 # Test cases
 print(fixed_point([-10, -5, 0, 3, 7]))  # 3
 print(fixed_point([0, 2, 5, 8, 17]))  # 0
+print(fixed_point([-10, 1, 2, 3, 7]))  # 1
