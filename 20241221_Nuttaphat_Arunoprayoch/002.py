@@ -21,7 +21,7 @@
 # ```
 
 
-# # Time complexity: O(n).
+# # Time complexity: O(n^2).
 # def two_sum_less_than_k(arr: list[int], k: int) -> list[list[int]]:
 #     """Find all combinations of sets where the sum S of elements is the maximum but less than K.
 
@@ -33,19 +33,19 @@
 #         list[list[int]]: All combinations of sets where the sum S of elements is the maximum but less than K.
 #     """
 #     result = []
-#     max_sum = float('-inf')  # Init the maximum sum as negative infinity
+#     max_sum = float('-inf')  # Initialize the maximum sum as negative infinity
 #     seen = set()
 
 #     for num in arr:
-#         target = k - num
-#         if target in seen:
-#             total = num + target
-#             if total > max_sum:
-#                 result = [[num, target]]
-#                 max_sum = total
-#             elif total == max_sum:
-#                 result.append([num, target])
-#         seen.add(num)
+#         for seen_num in seen:
+#             total = num + seen_num
+#             if total < k:
+#                 if total > max_sum:
+#                     result = [[seen_num, num]]  # Start a new result list with the current pair
+#                     max_sum = total
+#                 elif total == max_sum:
+#                     result.append([seen_num, num])  # Add to the current result list
+#         seen.add(num)  # Add the current number to the seen set
 
 #     return result
 
