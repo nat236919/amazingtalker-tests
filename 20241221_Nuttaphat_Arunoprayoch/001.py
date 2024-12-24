@@ -38,13 +38,13 @@ def fixed_point(arr: list[int]) -> int:
     result = -1  # Initialize result to -1 to indicate no fixed point found
     while left <= right:
         mid = left + (right - left) // 2
-        if arr[mid] == mid:
+        if arr[mid] < mid:
+            left = mid + 1
+        elif arr[mid] > mid:
+            right = mid - 1
+        else:
             result = mid  # Update the result to the current fixed point
             right = mid - 1  # Continue searching in the left half for a smaller index
-        elif arr[mid] < mid:
-            left = mid + 1
-        else:
-            right = mid - 1
     return result
 
 
